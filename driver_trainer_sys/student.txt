@@ -1,0 +1,1 @@
+create sequence seq_stu_id start with 100001 increment by 1 maxvalue 9999999 nocycle nocache;

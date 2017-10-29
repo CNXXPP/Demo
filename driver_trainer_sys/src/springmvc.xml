@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		
+		
+   <!-- ASPECTJ注解 -->
+   <aop:aspectj-autoproxy proxy-target-class="true" />
+		
+		<!-- 1.创建扫描器 -->
+		<!-- 2.接收到请求的时候，到对应的包中扫描一个，有没有对应这个请求的处理的类（action/handler） -->
+		<context:component-scan base-package="com.great"></context:component-scan>
+		
+		<!-- 2.让这个扫描器支持springmvc，导入驱动 -->
+		<!-- 加载注解的驱动 -->
+		<mvc:annotation-driven></mvc:annotation-driven>
+		
+		<!-- 3.视图解析器 -->
+		<!-- 表示可以跳转那个jsp或者html页面上面 -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<!-- jsp或者html是放在那个目录下面的 -->
+			<property name="prefix" value="/jsp/"></property>
+			<property name="suffix" value=".jsp"></property>
+		</bean>
+
+		<!-- 静态资源获取 -->
+		<!-- 静态资源获取的方式：  location="/js/" 就是静态资源的路径，  
+		mapping="/word/**" 映射到路径的位置， 两个*号代表如果是在js下的子文件夹，也会去寻找-->
+		<mvc:resources location="/js/" mapping="/js/**"/> 
+		<mvc:resources location="/jsp/" mapping="/jsp/**"/>
+		<mvc:resources location="/images/" mapping="/images/**"/>
+		<mvc:resources location="/image/" mapping="/image/**"/>
+		<mvc:resources location="/css/" mapping="/css/**"/>
+		<mvc:resources location="/lib/" mapping="/lib/**"/>
+		<mvc:resources location="/temp/" mapping="/temp/**"/>
+		<mvc:resources location="/static/" mapping="/static/**"/>
+		<mvc:resources location="/layui/" mapping="/layui/**"/> 
+		<mvc:resources location="/page/" mapping="/page/**"/>
+		<mvc:resources location="/My97DatePicker/" mapping="/My97DatePicker/**"/>
+		
+
+				<!-- 文件上传 -->
+	    <bean id="multipartResolver" 
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	      <!-- 设置上传文件的格式 -->
+    	  <property name="defaultEncoding" value="UTF-8"></property>
+		  <!--  设置上传文件的最大尺寸为5MB --> 
+		  <property name="maxUploadSize">
+		      <value>5242880</value> 
+		  </property>
+		</bean>
+		
+		<!-- 初始化mybatis信息 -->
+	<!-- 1、数据库连接,这里是原生mybatis连接配 -->
+	<!-- <util:properties id="Config" location="classpath:config.properties"></util:properties>
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="#{Config.url}"></property>
+		<property name="driverClassName" value="#{Config.driver}"></property>
+		<property name="username" value="#{Config.username}"></property>
+		<property name="password" value="#{Config.password}"></property>
+	</bean> -->
+	
+	<!-- 这里的数据库连接就使用了DBUtil C3P0 -->
+<!-- 	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"    -->
+<!--             destroy-method="close">   -->
+<!--         <property name="driverClass" value="com.mysql.jdbc.Driver" />   -->
+<!--         <property name="jdbcUrl" value="jdbc:mysql://120.77.85.184:3306/driverTrainerSys?useUnicode=true&amp;characterEncoding=utf8"/>   -->
+
+<!--         <property name="user" value="driversys" />   -->
+<!--         <property name="password" value="1111" />   -->
+<!--         <property name="initialPoolSize" value="1" />   -->
+<!--         <property name="minPoolSize" value="0" />   -->
+<!--         <property name="maxPoolSize" value="10" />   -->
+<!--         <property name="acquireIncrement" value="5" />   -->
+<!--         <property name="maxIdleTime" value="10" />   -->
+<!--         <property name="maxStatements" value="0" /> -->
+       
+<!--     </bean>   -->
+	<!--  c3p0 oracle-->
+	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"   
+            destroy-method="close">  
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />  
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"/>  
+        <property name="user" value="JF1704" />  
+        <property name="password" value="JF170412" />  
+        <property name="initialPoolSize" value="1" />  
+        <property name="minPoolSize" value="0" />  
+        <property name="maxPoolSize" value="10" />  
+        <property name="acquireIncrement" value="5" />  
+        <property name="maxIdleTime" value="10" />  
+        <property name="maxStatements" value="0" />
+       
+    </bean>  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="myDataSource"></property>
+    </bean>
+    <!-- 2、配置sqlsessionfactory，这个对象通过spring来创建 -->
+	<bean id="mySessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource"></property>
+		<!-- 这里配置的是sql语句的xml位置 -->
+		<property name="mapperLocations" value="classpath:com/great/mapper/*.xml"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	
+	<!-- 3、配置扫描信息，扫描的是dao接口  -->
+	<bean id="dataSource" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.great.dao"></property>
+		<property name="sqlSessionFactory" ref="mySessionFactory"></property>
+		<property name="annotationClass" value="org.springframework.stereotype.Repository"></property>
+		
+	</bean>
+		
+
+</beans>
