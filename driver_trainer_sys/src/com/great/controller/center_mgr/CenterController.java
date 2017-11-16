@@ -32,6 +32,7 @@ import com.great.service.center_mgr.imp.AccountCharServiceImp;
 import com.great.service.center_mgr.imp.CenterAdminServiceImp;
 import com.great.service.center_mgr.imp.MenuServiceImp;
 import com.great.util.AuthCode;
+import com.megvii.cloud.mylibrary.R.string;
 
 @Controller
 @RequestMapping("/xp")
@@ -42,17 +43,17 @@ public class CenterController {
 	private CenterAdminServiceImp centerAdminService;
 	@Autowired
 	private MenuServiceImp menuServiceImp;
-	// ÑéÖ¤Âë
+	// é”Ÿæ–¤æ‹·è¯é”Ÿæ–¤æ‹·
 	@RequestMapping(value = "/centerMgr/AuthCode")
 	@ResponseBody
-	// Õâ¸ö·½·¨ÊÇÊı¾İ£¨Í¼Æ¬¡¢json¡¢ÆäËûÊı¾İ)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ·ï½æ‹·å›¾ç‰‡é”Ÿæ–¤æ‹·jsoné”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è½¬é”Ÿæ–¤æ‹·
 	public void centerAuthCode(HttpServletResponse response) throws Exception {
 		code = AuthCode.getAuthCode();
 
 		BufferedImage image = AuthCode.getAuthImg(code);
 
 		try {
-			// Ğ´Èë¶ÔÓ¦img±êÇ©ÉÏ£¬ÏÔÊ¾³öÀ´
+			// å†™é”Ÿæ–¤æ‹·é”Ÿæ¥î›mgé”Ÿæ–¤æ‹·ç­¾é”Ÿè¾ƒï½æ‹·é”Ÿæ–¤æ‹·ç¤ºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 			ImageIO.write(image, "JPEG", response.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -60,10 +61,10 @@ public class CenterController {
 		}
 	}
 
-	// µÇÂ¼
+	// é”Ÿæ–¤æ‹·å½•
 	@RequestMapping(value = "/centerMgr/login")
 	@ResponseBody
-	// Õâ¸ö·½·¨ÊÇÊı¾İ£¨Í¼Æ¬¡¢json¡¢ÆäËûÊı¾İ)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ·ï½æ‹·å›¾ç‰‡é”Ÿæ–¤æ‹·jsoné”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è½¬é”Ÿæ–¤æ‹·
 	public Map<String, Object> centerLogin(CenterAdmin admin, String codeInput,
 			HttpSession session) throws Exception {
 		Map<String, Object> map = new HashMap<>();
@@ -78,9 +79,9 @@ public class CenterController {
 					session.setAttribute("admin", centerAdmin);
 					Map<String, String> adminMap = centerAdminService.getLastLoginDateAndChar(centerAdmin.getAdmUuid());
 					session.setAttribute("adminMap", adminMap);
-					//µÇÂ½³É¹¦ admin´æÈësessionºó¸ü¸ÄÉÏ´ÎµÇÂ½Ê±¼ä
+					//é”Ÿæ–¤æ‹·é™†é”Ÿç¼´ç™¸æ‹· adminé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·sessioné”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿè¾ƒæ¬¡ç¢‰æ‹·é™†æ—¶é”Ÿæ–¤æ‹·
 					centerAdminService.updateLastLoginDate(centerAdmin.getAdmUuid());
-					Map<String, Map<String, String>> menuMap = menuServiceImp.getMenu(centerAdmin.getAdmId());//»ñµÃÈ¨ÏŞ²Ëµ¥
+					Map<String, Map<String, String>> menuMap = menuServiceImp.getMenu(centerAdmin.getAdmId());//é”Ÿæ–¤æ‹·é”Ÿé¥ºîŸ’æ‹·è–è¯´é”Ÿï¿½
 					session.setAttribute("menuMap", menuMap);
 					result = "success";
 				} else {
@@ -94,7 +95,7 @@ public class CenterController {
 		return map;
 	}
 
-	// Ìí¼Ó
+	// é”Ÿæ–¤æ‹·é”Ÿï¿½
 	@RequestMapping(value = "/centerMgr/addAdmin")
 	@ResponseBody
 	public Map<String, Object> addCenterAdmin(CenterAdmin admin, int charNo)
@@ -107,7 +108,7 @@ public class CenterController {
 		return map;
 	}
 
-	// »ñÈ¡ËùÓĞ
+	// é”Ÿæ–¤æ‹·å–é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
 	@RequestMapping(value = "/centerMgr/showAllAdmin")
 	@ResponseBody
 	public String showAllAdmin() throws Exception {
@@ -132,7 +133,7 @@ public class CenterController {
 		return sendJsonObject.toJSONString();
 	}
 
-	// É¾³ı
+	// åˆ é”Ÿæ–¤æ‹·
 	@RequestMapping("/centerMgr/delAdmin")
 	@ResponseBody
 	public Map<String, Object> delAdmin(int admId) throws Exception {
@@ -149,7 +150,7 @@ public class CenterController {
 		return map;
 	}
 
-	// ÖØÖÃÃÜÂëÎª123456
+	// é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸º123456
 	@RequestMapping(value = "/centerMgr/resetAdminPwd")
 	@ResponseBody
 	public Map<String, Object> resetAdminPwd(int admId) throws Exception {
@@ -166,7 +167,7 @@ public class CenterController {
 		return map;
 	}
 
-	// ĞŞ¸ÄĞÅÏ¢
+	// é”Ÿç«é©æ‹·é”Ÿæ–¤æ‹·æ¯
 	@RequestMapping(value = "/centerMgr/updateInfo")
 	@ResponseBody
 	public Map<String, Object> updateInfo(@RequestParam Map<String, String> map)
@@ -200,7 +201,19 @@ public class CenterController {
 		return map;
 	}
 	
-	
-	
+	@RequestMapping(value = "/testJson")
+	@ResponseBody
+	public String testJson(String json)
+			{
+		System.out.println(JSONObject.parseObject(json));
+		JSONObject object = JSONObject.parseObject(json);
+		JSONArray array = object.getJSONArray("list");
+		for (int i = 0; i < array.size(); i++) {
+			
+			JSONObject object2 = array.getJSONObject(i);
+			System.out.println(object2);
+		}
+		return "1";
+	}
 	
 }

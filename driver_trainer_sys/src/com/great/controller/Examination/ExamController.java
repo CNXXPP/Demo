@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -46,7 +45,7 @@ public class ExamController {
 		BufferedImage image = AuthCode.getAuthImg(code);
 		session.setAttribute("examValideCode", code);
 		try {
-			// Ð´Èë¶ÔÓ¦img±êÇ©ÉÏ£¬ÏÔÊ¾³öÀ´
+			// Ð´ï¿½ï¿½ï¿½Ó¦imgï¿½ï¿½Ç©ï¿½Ï£ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 			ImageIO.write(image, "JPEG", response.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -77,10 +76,10 @@ public class ExamController {
 
 		boolean res = examinationService.calcScore(scScore, curSub, startTime, endTime,
 				session);
-		if(!res){  //Ä³ÕÅÕÕÆ¬ÑéÖ¤Ê§°Ü£¬·µ»Ø³É¼¨Îª-1
+		if(!res){  //Ä³ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½Ö¤Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½Ø³É¼ï¿½Îª-1
 			scScore = "-1";
 		}
-		CameraJavaCV.flag = false;  //¿ØÖÆÏß³ÌÍ£Ö¹
+		CameraJavaCV.flag = false;  //ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½Í£Ö¹
 		
 		CameraJavaCV.grabber.stop();
 		

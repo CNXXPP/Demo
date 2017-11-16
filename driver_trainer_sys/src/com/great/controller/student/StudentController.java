@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,18 +37,18 @@ import com.great.service.studentService.IStudentService;
 
 import com.great.util.AuthCode;
 /**
- * ѧԱ���Ŀ��Ʋ�
+ * 学员锟斤拷锟侥匡拷锟狡诧拷
  * 
  * */
 @Controller
 @RequestMapping("/grj")
 public class StudentController {
 	
-	private String imgCode = "";//����֤������
+	private String imgCode = "";//锟斤拷锟斤拷证锟斤拷锟斤拷锟斤拷
 	
 	@Autowired
 	IStudentService studentServiceImp;
-	//��ȡ�˹������һ�ι���
+	//锟斤拷取锟剿癸拷锟斤拷锟斤拷一锟轿癸拷锟斤拷
 	@RequestMapping("/announcement/getCenterAnnouncement")
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
@@ -70,7 +69,7 @@ public class StudentController {
 		
 	}
 	
-	//��ȡ��У�����һ�ι���
+	//锟斤拷取锟斤拷校锟斤拷锟斤拷一锟轿癸拷锟斤拷
 	@RequestMapping("/announcement/getSchoolAnnouncement")
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
@@ -81,7 +80,7 @@ public class StudentController {
 		
 		if(schAnnouncement != null){
 			
-			map.put("studentSchoolAnnouncement", schAnnouncement);//���������������һ������
+			map.put("studentSchoolAnnouncement", schAnnouncement);//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷一锟斤拷锟斤拷锟斤拷
 			
 			return map;
 		}else{
@@ -92,7 +91,7 @@ public class StudentController {
 	}
 	
 	
-	//ѧ����½ʱ��ȡ��֤��ʹ��
+	//学锟斤拷锟铰绞憋拷锟饺★拷锟街わ拷锟绞癸拷锟�
 	@RequestMapping("/student/studentAuthCode")
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
@@ -103,7 +102,7 @@ public class StudentController {
 		BufferedImage image = AuthCode.getAuthImg(imgCode);
 	
 		try {
-			//д���Ӧimg��ǩ�ϣ���ʾ����
+			//写锟斤拷锟接mg锟斤拷签锟较ｏ拷锟斤拷示锟斤拷锟斤拷
 			ImageIO.write(image, "JPEG", response.getOutputStream());
 		} catch (IOException e) {
 			
@@ -111,7 +110,7 @@ public class StudentController {
 		}
 	}
 	
-	//ѧ����½�ж�ʹ��
+	//学锟斤拷锟铰斤拷卸锟绞癸拷锟�
 	@RequestMapping(value="/login/studentLogin",method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
@@ -128,21 +127,21 @@ public class StudentController {
 	    
 		String code=map.get("code");
 	  
-		if(msg.equals("�����ڸ��û�")){
-			backMap.put("message", "�����ڸ��û�");
+		if(msg.equals("锟斤拷锟斤拷锟节革拷锟矫伙拷")){
+			backMap.put("message", "锟斤拷锟斤拷锟节革拷锟矫伙拷");
 			return backMap;
 		}else if(msg.equals("success")){
 			
 			if(imgCode.equalsIgnoreCase(code)){
-				backMap.put("message" , "��½�ɹ�");
+				backMap.put("message" , "锟斤拷陆锟缴癸拷");
 				
 				return backMap;
 			}else{
-				backMap.put("message", "��֤�����");
+//				backMap.put("message", "锟斤拷证锟斤拷锟斤拷锟�);
 				return backMap;
 			}
 		}else{
-			backMap.put("message" , "��¼ʧ��");
+			backMap.put("message" , "锟斤拷录失锟斤拷");
 			return backMap;
 		}
 		
@@ -151,7 +150,7 @@ public class StudentController {
 		
 	}
 	
-	//��ȡ��У���˹ܵĹ���
+	//锟斤拷取锟斤拷校锟斤拷锟剿管的癸拷锟斤拷
 	@RequestMapping(value="/announcement/studentannouncement",method=RequestMethod.POST)
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
@@ -174,7 +173,7 @@ public class StudentController {
 	@ResponseBody
 	@Transactional (rollbackFor = Exception.class )
 	public Map<String, Object>getTrainers(String schUuid)throws Exception{
-		//��ȡ��У�����еĽ���
+		//锟斤拷取锟斤拷校锟斤拷锟斤拷锟叫的斤拷锟斤拷
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<Trainer> trainers = studentServiceImp.getTrainersBySchUuid(schUuid);
@@ -191,21 +190,21 @@ public class StudentController {
 	@RequestMapping(value="/student/studengRigester",method=RequestMethod.POST)
 	@Transactional (rollbackFor = Exception.class )
 	public ModelAndView studengRigester(@RequestParam Map<String, String>map,HttpSession session)throws Exception{
-		//ѧԱע��
+		//学员注锟斤拷
 		
 		studentServiceImp.StudentRegister(map, session);
 		
 		
 		ModelAndView modelAndView= new ModelAndView("studentSystem/pay");
 	
-		//�������
+		//锟斤拷锟斤拷锟斤拷锟�
 		 session.setAttribute("WIDout_trade_no", System.currentTimeMillis());
-		//�������
+		//锟斤拷锟斤拷锟斤拷锟�
 		 session.setAttribute("WIDtotal_amount", 6300);
-		//��������
-		 session.setAttribute("WIDsubject", "������");
-		//�������� 
-		 session.setAttribute("WIDbody", "ѧ������֧����֧��");
+		//锟斤拷锟斤拷锟斤拷锟�
+//		 session.setAttribute("WIDsubject", "锟斤拷锟斤拷锟�);
+		//锟斤拷锟斤拷锟斤拷锟斤拷 
+		 session.setAttribute("WIDbody", "学锟斤拷锟斤拷支锟斤拷锟斤拷支锟斤拷");
 		
 		return modelAndView;
 	}
@@ -215,8 +214,8 @@ public class StudentController {
 	@ResponseBody
 	@Transactional (rollbackFor = Exception.class )
 	public void savaSchUuid(HttpSession session,String schUuid)throws Exception{
-		//����ѧУ��uuid
-		//�������Уչʾҳ���ı���ʱ������ѧУ��uuidȻ����ת��ѧԱע����棬ͨ��el����ʽ��ȡѧУ��uuid���ڲ������ݿ�
+		//锟斤拷锟斤拷学校锟斤拷uuid
+		//锟斤拷锟斤拷锟斤拷锟叫Ｕ故疽筹拷锟斤拷谋锟斤拷锟绞憋拷锟斤拷锟斤拷锟窖ｏ拷锟絬uid然锟斤拷锟斤拷转锟斤拷学员注锟斤拷锟斤拷妫拷锟絜l锟斤拷锟绞斤拷锟饺⊙ｏ拷锟絬uid锟斤拷锟节诧拷锟斤拷锟斤拷菘锟�
 		session.setAttribute("schUuid", schUuid);
 		
 	}

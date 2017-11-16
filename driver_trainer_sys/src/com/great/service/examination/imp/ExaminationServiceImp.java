@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import oracle.net.aso.s;
@@ -35,7 +36,7 @@ import com.great.util.FacePP;
 @Service
 public class ExaminationServiceImp implements IExaminationService{
 
-	@Autowired
+	@Resource
 	private QuestionMapper questionMapper;
 	@Autowired
 	private ExamRegisterMapper examRegisterMapper;

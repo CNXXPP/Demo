@@ -8,10 +8,9 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.swing.JFrame;
 
+import org.bytedeco.javacpp.opencv_objdetect.CvHaarClassifierCascade;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
@@ -23,7 +22,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 public class CameraJavaCV implements Runnable{
-
 	public static OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
 	public static CameraJavaCV cameraJavaCV = new CameraJavaCV();
 	public static String savePath;
@@ -35,8 +33,8 @@ public class CameraJavaCV implements Runnable{
 		
         try {
 			grabber.start();
-		   //¿ªÊ¼»ñÈ¡ÉãÏñÍ·Êý¾Ý  
-        canvas = new CanvasFrame("ÉãÏñÍ·");//ÐÂ½¨Ò»¸ö´°¿Ú  
+		   //ï¿½ï¿½Ê¼ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½  
+        canvas = new CanvasFrame("ï¿½ï¿½ï¿½ï¿½Í·");//ï¿½Â½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
         canvas.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);  
         canvas.setAlwaysOnTop(true);  
         Java2DFrameConverter java2dConverter = new Java2DFrameConverter();
@@ -53,17 +51,17 @@ public class CameraJavaCV implements Runnable{
         {  
         	
            if(!canvas.isDisplayable())  
-            {//´°¿ÚÊÇ·ñ¹Ø±Õ  
+            {//ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ø±ï¿½  
         	  
                 grabber.stop();//Í£Ö¹×¥È¡  
-//                System.exit(2);//ÍË³ö  
+//                System.exit(2);//ï¿½Ë³ï¿½  
             }else{
             	
             }
           
-            canvas.showImage(grabber.grab());//»ñÈ¡ÉãÏñÍ·Í¼Ïñ²¢·Åµ½´°¿ÚÉÏÏÔÊ¾£¬ ÕâÀïµÄFrame frame=grabber.grab(); frameÊÇÒ»Ö¡ÊÓÆµÍ¼Ïñ  
+            canvas.showImage(grabber.grab());//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í·Í¼ï¿½ñ²¢·Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Frame frame=grabber.grab(); frameï¿½ï¿½Ò»Ö¡ï¿½ï¿½ÆµÍ¼ï¿½ï¿½  
             
-            Thread.sleep(50);//1ºÁÃëË¢ÐÂÒ»´ÎÍ¼Ïñ  
+            Thread.sleep(50);//1ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½Ò»ï¿½ï¿½Í¼ï¿½ï¿½  
             Random random = new Random();
             int r = random.nextInt(60);
             if(photoCnt < 3 && r == 5){

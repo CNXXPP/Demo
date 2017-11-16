@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.jms.Session;
-import javax.json.JsonArray;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,8 @@ public class GetCardTimeControl {
     
 	
 	@RequestMapping(value="/CardTime/getCarTime")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
-	//»ñÈ¡Ñ§Ô±µÄ´ò¿¨Ê±¼ä
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+	//ï¿½ï¿½È¡Ñ§Ô±ï¿½Ä´ï¿½Ê±ï¿½ï¿½
 	public Map<String, StuCardTime> getStuCardTime(HttpSession session) throws Exception{
         
 		Student stu = (Student) session.getAttribute("Student");
@@ -50,7 +49,7 @@ public class GetCardTimeControl {
 		
 			StuCardTime stucardtime = GetCarTimeServiceImpl.selectCardtime(stuUuid);
 			
-			System.out.println("´ò¿¨Ê±¼ä" + stucardtime);
+			System.out.println("ï¿½ï¿½Ê±ï¿½ï¿½" + stucardtime);
 			
 			map.put("StuCardTime", stucardtime);
 			
@@ -61,7 +60,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/getFirstSubTime")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public String getFirstSubTime(HttpSession session) throws Exception{
 		
 		Student stu = (Student) session.getAttribute("Student");
@@ -103,7 +102,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/getForthSubTime")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public String getForthSubTime(HttpSession session) throws Exception{
 		
         Student stu = (Student) session.getAttribute("Student");
@@ -143,7 +142,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/updateCardTime")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public void updateCardTime(HttpSession session, int time) throws Exception{
         Student stu = (Student) session.getAttribute("Student");
 		
@@ -167,7 +166,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/upCardTime")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public void upCardTime(HttpSession session, int time) throws Exception{
         Student stu = (Student) session.getAttribute("Student");
 		
@@ -192,7 +191,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/CartTimeRec1")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public void CartTimeRec(HttpSession session, int time) throws Exception{
         Student stu = (Student) session.getAttribute("Student");
 		
@@ -218,7 +217,7 @@ public class GetCardTimeControl {
 		
 		timerec.setCtrDate(date1);
 		
-		System.out.println("ÎÒµÄ¼ÇÂ¼"+timerec);
+		System.out.println("ï¿½ÒµÄ¼ï¿½Â¼"+timerec);
 		
 		int x = GetCarTimeServiceImpl.insertStuCartTime(timerec);
 	}
@@ -226,7 +225,7 @@ public class GetCardTimeControl {
 	
 	
 	@RequestMapping(value="/CardTime/CartTimeRec2")
-	@ResponseBody//Õâ¸ö·½·¨ÊÇÊý¾Ý£¨Í¼Æ¬¡¢json¡¢ÆäËûÊý¾Ý)²»ÊÇÓÃÀ´×öÌø×ªµÄ
+	@ResponseBody//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¼Æ¬ï¿½ï¿½jsonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 	public void CartTimeRec2(HttpSession session, int time) throws Exception{
         Student stu = (Student) session.getAttribute("Student");
 		
@@ -252,7 +251,7 @@ public class GetCardTimeControl {
 		
 		timerec.setCtrDate(date1);
 		
-		System.out.println("ÎÒµÄ¼ÇÂ¼"+timerec);
+		System.out.println("ï¿½ÒµÄ¼ï¿½Â¼"+timerec);
 		
 		int x = GetCarTimeServiceImpl.insertStuCartTime(timerec);
 	}

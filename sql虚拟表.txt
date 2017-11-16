@@ -1,0 +1,15 @@
+	select * from
+		<foreach collection="times" open="(" close=")" separator="union"
+			item="time">
+			select #{time} x,#{deviceId} id, #{eKey} xkey
+		</foreach>
+		xAxis LEFT JOIN d_envmonitorlog e on (xAxis.x=e.observetime and
+		xAxis.xkey=e.ekey and xAxis.id=e.deviceid) ORDER BY xAxis.x
+select '2011' as year,'1112' as date
+union
+select '2012' as year,'1112' as date
+union
+select '2013' as year,'1112' as date
+union
+select '2014' as year,'1112' as date;
+可以创建一张虚拟的表用来与存在的表做一个外连接

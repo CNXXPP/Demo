@@ -10,4 +10,6 @@ encoding//WebRoot/jsp/schoolSystem/NewMail.jsp=UTF-8
 encoding//WebRoot/jsp/theorySystem/js/bodyTab.js=UTF-8
 encoding//WebRoot/layui/css/layui.css=UTF-8
 encoding//WebRoot/layui/layui.js=UTF-8
+encoding//src/com/great/controller/center_mgr/CenterController.java=UTF-8
+encoding//src/com/great/controller/student/StudentController.java=UTF-8
 encoding//src/com/great/util/FacePP.java=UTF-8
